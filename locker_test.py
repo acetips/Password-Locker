@@ -1,5 +1,5 @@
 import unittest
-from locker import User
+from locker import User, Credentials
 
 class TestUser(unittest.TestCase):
     '''
@@ -36,12 +36,38 @@ class TestCredentials(unittest.TestCase):
     '''
     Test class to define test cases for behaviours in the credentials class
     '''
+    def setUp(self):
+        '''
+        method to run before the test cases
+        '''
+        self.new_credentials = Credentials("Twitter", "PerezTweets", 0000)
+
+    def test_init(self):
+        '''
+        method to test if object is initialized properly
+        '''
+
+        self.assertEqual(self.new_credentials.website, "Twitter")
+        self.assertEqual(self.new_credentials.website_username, "PerezTweets")
+        self.assertEqual(self.new_credentials.website_password,0000)
+
+    def tearDown(self):
+        '''
+        method to clear each test case after running the tests
+        '''
+        Credentials.credentials_list = []
+    
+    def save_credentials(self):
+        '''
+        method to test if user credentials are saved
+        '''
+
     def test_multiple_credentials(self):
         '''
         a test to save user credentials for multiple websites or applications
         '''
-        self.new
-
+        self.new_credentials.save_credentials()
+        self.assertEqual(len(Credentials.credentials_list),1)
 
 if __name__ == '__main__':
     unittest.main()
