@@ -61,13 +61,28 @@ class TestCredentials(unittest.TestCase):
         '''
         method to test if user credentials are saved
         '''
+        self.new_credentials.save_credentials()
+        self.assertEqual(len(Credentials.credentials_list),1)
+
 
     def test_multiple_credentials(self):
         '''
         a test to save user credentials for multiple websites or applications
         '''
         self.new_credentials.save_credentials()
-        self.assertEqual(len(Credentials.credentials_list),1)
+        another_credential = Credentials("Instagram","PerezGrams", 1111)
+        another_credential.save_credentials()
+        self.assertEqual(len(Credentials.credentials_list),2)
 
+    def test_deleting_credentials(self):
+        '''
+        a test for deleting a user's credentials
+        '''
+        self.new_credentials.save_credentials()
+        another_credential = Credentials("Instagram","PerezGrams", 1111)
+        
+
+
+        
 if __name__ == '__main__':
     unittest.main()
