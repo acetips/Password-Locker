@@ -32,7 +32,15 @@ class TestUser(unittest.TestCase):
         self.new_user.save_user()
         self.assertEqual(len(User.locker_list),1)
 
-    def
+    def test_verify_user(self):
+        self.new_user.save_user()
+        another_user = User("Edwin","Maina", "winnstar")
+        another_user.save_user()
+
+        user_exists = User.user_exists("winnstar")
+
+        self.assertTrue(user_exists)
+
 
 class TestCredentials(unittest.TestCase):
     '''
