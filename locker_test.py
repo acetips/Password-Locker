@@ -32,6 +32,8 @@ class TestUser(unittest.TestCase):
         self.new_user.save_user()
         self.assertEqual(len(User.locker_list),1)
 
+    def
+
 class TestCredentials(unittest.TestCase):
     '''
     Test class to define test cases for behaviours in the credentials class
@@ -80,8 +82,18 @@ class TestCredentials(unittest.TestCase):
         '''
         self.new_credentials.save_credentials()
         another_credential = Credentials("Instagram","PerezGrams", 1111)
-        
+        another_credential.save_credentials()
 
+        self.new_credentials.delete_credentials()
+        self.assertEqual(len(Credentials.credentials_list),1)
+
+    def test_find_by_website(self):
+        self.new_credentials.save_credentials()
+        another_credential = Credentials("Instagram","PerezGrams", 1111)
+        another_credential.save_credentials()
+
+        found_credentials = Credentials.find_by_website("Instagram")
+        self.assertEqual(found_credentials.website_username, another_credential.website_username)
 
         
 if __name__ == '__main__':
