@@ -65,6 +65,29 @@ def main():
             username = input()
             print("Preferred password:")
             mypassword = input()
+            print()
+
+            save_user(create_passwordlocker_account(first_name,last_name,username,password))
+            print('\n')
+            print("Congratulations!Your account has been created successfully. Here are your details:")
+            print(f"Account details {first_name} {last_name} {username} {password}")
+            print('\n')
+            print("To login, enter your username:")
+            created_username = input()
+            print("Enter your password:")
+            created_password = input()
+
+            if created_username != username or created_password != mypassword:
+                print("Invalid username and/or password")
+                print('\n')
+                print("Enter username")
+                created_username = input()
+                print("Enter password")
+                created_password = input()
+            else:
+                print("Login successful!")
+                print('\n')
+                
         elif user_input == 'la':
             print ("Login to your account")
             print("*"*6)
@@ -72,12 +95,6 @@ def main():
             username = input()
             print("Enter your password")
             mypassword = input()
-
-            save_user(create_passwordlocker_account(first_name,last_name,username,password))
-            print('\n')
-            print("Congratulations!Your account has been created successfully. Here are your details:")
-            print(f"Account details {first_name} {last_name} {username} {password}")
-            print('\n')
 
         elif user_input == 'la':
             print("Account login")
