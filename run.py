@@ -95,6 +95,55 @@ def main():
             else:
                 print("Login successful!")
                 print('\n')
+                print("Would you like to:")
+                print("cc - Add or create a new credential")
+                print("dd - Delete a credential")
+                print("vv - View your credentials")
+                print("ff - Find a credential")
+                user_input = input().lower()
+                if user_input == 'cc':
+                    print("Create a new credential")
+                    print("* "*6)
+                    print("Enter website or app name Eg Github:")
+                    website = input()
+                    print("Enter your username on the website Eg acetips")
+                    website_username = input()
+                    print("Enter your password for the specified website above:")
+                    website_password = input()
+                    print()
+
+                    save_credentials(create_credential(website,website_username,website_password))
+                    print('\n')
+                    print(f"Congratulations!Your {website} account details have been saved successfully.")
+                    print('* '*6)
+                    print("Enter 'vv' to view your credentials")
+                    user_input = input().lower()
+                    if user_input == 'vv':
+                        print('Here are your credentials:')
+                        print(f'{website}|{website_username}|{website_password}')
+                    else:
+                        break
+                
+                elif user_input == 'dd':
+                    print("Enter the website or app name whose credentials you would like to delete:")
+                    print("* "*6)
+                    dispensable_credential_website = input()
+                    dispensable_credential = find_credentials(dispensable_credential_website)
+                    print('\n')
+                    print(f"Your {dispensable_credential_website} credentials have been successfully deleted!")
+                    break
+                
+                elif user_input == 'vv':
+                    if show_all_credentials():
+                        print("Here are all your credentials:")
+                        for credentials in show_all_credentials():
+                            print(f'{credentials.website} {credentials.website_username} {credentials.website_password}')
+                            # print(f'{credentials_list}')
+
+                    else:
+                        print("You have no saved credentials at the moment.")
+                        break
+
                 
 
         elif user_input == 'la':
