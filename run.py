@@ -142,6 +142,7 @@ def main():
                             print(f'{website}|{website_username}|{website_password}')
                         else:
                             break
+                            
                     else:
                         print("Preferred username:")
                         website_username = input()
