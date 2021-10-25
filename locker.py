@@ -4,7 +4,7 @@ class User:
     '''
     locker_list = [] #empty locker list
 
-    def __init__(self,first_name,last_name,username):
+    def __init__(self,first_name,last_name,username,mypassword):
         '''
         __init__ method that defines the objects' properties
         '''
@@ -12,6 +12,7 @@ class User:
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
+        self.mypassword = mypassword
     
     def save_user(self):
         '''
@@ -52,6 +53,10 @@ class Credentials:
         '''
         Credentials.credentials_list.remove(self)
 
+    def show_all_credentials():
+
+        return Credentials.credentials_list
+
     @classmethod
     def find_by_website(cls, website):
         for credential in cls.credentials_list:
@@ -60,6 +65,8 @@ class Credentials:
     
     def test_display_credentials(cls):
         return cls.credentials_list
+
+    
 
    
 

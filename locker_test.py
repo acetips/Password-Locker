@@ -9,7 +9,7 @@ class TestUser(unittest.TestCase):
         '''
         Set up method to run before each test
         '''
-        self.new_user= User("Emelda", "Perez", "acetips")
+        self.new_user= User("Emelda", "Perez", "acetips", 1234)
 
     def test_init(self):
         '''
@@ -18,6 +18,8 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.new_user.first_name,"Emelda")
         self.assertEqual(self.new_user.last_name,"Perez")
         self.assertEqual(self.new_user.username,"acetips")
+        self.assertEqual(self.new_user.mypassword,1234)
+
 
     def tearDown(self):
         '''
@@ -34,7 +36,7 @@ class TestUser(unittest.TestCase):
 
     def test_verify_user(self):
         self.new_user.save_user()
-        another_user = User("Edwin","Maina", "winnstar")
+        another_user = User("Edwin","Maina", "winnstar",1234)
         another_user.save_user()
 
         user_exists = User.user_exists("winnstar")
