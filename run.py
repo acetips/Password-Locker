@@ -3,6 +3,9 @@
 from locker import User
 from locker import Credentials
 
+import random
+import string
+
 
 def create_passwordlocker_account(first_name,last_name,username,mypassword):
     '''
@@ -22,6 +25,13 @@ def verify_user(username):
     A function to check whether the user exists
     '''
     return User.user_exists(username)
+
+def generate_random_password(length = 4):
+    '''
+    A function that generates a random password for the user
+    '''
+    characters = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(random.choice(characters) for i in range(length))
 
 def save_credentials(credential):
     '''
@@ -69,11 +79,19 @@ def main():
             first_name = input()
             print("Last Name:")
             last_name = input()
-            print("Preferred username:")
-            username = input()
-            print("Preferred password:")
-            mypassword = input()
-            print()
+            print("To generate a random password, enter 'gg';To create your preferred password, enter 'pp':")
+            user_input = input().lower()
+            if user_input == 'gg':
+                print("Preferred username:")
+                username = input()
+                mypassword = generate_random_password()
+                print(f"Your password is {mypassword}")
+            else:
+                print("Preferred username:")
+                username = input()
+                print("Preferred password:")
+                mypassword = input()
+                print()
 
             save_user(create_passwordlocker_account(first_name,last_name,username,mypassword))
             print('\n')
@@ -98,7 +116,7 @@ def main():
                 print("Would you like to:")
                 print("cc - Add or create a new credential")
                 print("dd - Delete a credential")
-                print("vv - View your credentials")
+                print("dis - Display your credentials")
                 print("ff - Find a credential")
                 user_input = input().lower()
                 if user_input == 'cc':
@@ -106,23 +124,45 @@ def main():
                     print("* "*6)
                     print("Enter website or app name Eg Github:")
                     website = input()
-                    print("Enter your username on the website Eg acetips")
-                    website_username = input()
-                    print("Enter your password for the specified website above:")
-                    website_password = input()
-                    print()
-
-                    save_credentials(create_credential(website,website_username,website_password))
-                    print('\n')
-                    print(f"Congratulations!Your {website} account details have been saved successfully.")
-                    print('* '*6)
-                    print("Enter 'vv' to view your credentials")
+                    print("To generate a random password, enter 'gg';To create your preferred password, enter 'pp':")
                     user_input = input().lower()
-                    if user_input == 'vv':
-                        print('Here are your credentials:')
-                        print(f'{website}|{website_username}|{website_password}')
+                    if user_input == 'gg':
+                        print("Preferred username:")
+                        website_username = input()
+                        website_password = generate_random_password()
+                        print(f"Your password is {website_password}")
+                        save_credentials(create_credential(website,website_username,website_password))
+                        print('\n')
+                        print(f"Congratulations!Your {website} account details have been saved successfully.")
+                        print('* '*6)
+                        print("Enter 'dis' to display your credentials")
+                        user_input = input().lower()
+                        if user_input == 'dis':
+                            print('Here are your credentials:')
+                            print(f'{website}|{website_username}|{website_password}')
+                        else:
+                            break
                     else:
-                        break
+                        print("Preferred username:")
+                        website_username = input()
+                        print("Preferred password:")
+                        website_password = input()
+                        print()
+                        print("Confirm your password for the specified website above:")
+                        website_password = input()
+                        print()
+
+                        save_credentials(create_credential(website,website_username,website_password))
+                        print('\n')
+                        print(f"Congratulations!Your {website} account details have been saved successfully.")
+                        print('* '*6)
+                        print("Enter 'dis' to display your credentials")
+                        user_input = input().lower()
+                        if user_input == 'dis':
+                            print('Here are your credentials:')
+                            print(f'{website}|{website_username}|{website_password}')
+                        else:
+                            break
                 
                 elif user_input == 'dd':
                     print("Enter the website or app name whose credentials you would like to delete:")
@@ -133,7 +173,7 @@ def main():
                     print(f"Your {dispensable_credential_website} credentials have been successfully deleted!")
                     break
                 
-                elif user_input == 'vv':
+                elif user_input == 'dis':
                     if show_all_credentials():
                         print("Here are all your credentials:")
                         for credentials in show_all_credentials():
@@ -166,7 +206,7 @@ def main():
                 print("Would you like to:")
                 print("cc - Add or create a new credential")
                 print("dd - Delete a credential")
-                print("vv - View your credentials")
+                print("dis - View your credentials")
                 print("ff - Find a credential")
                 user_input = input().lower()
                 if user_input == 'cc':
@@ -174,9 +214,20 @@ def main():
                     print("* "*6)
                     print("Enter website or app name Eg Github:")
                     website = input()
-                    print("Enter your username on the website Eg acetips")
-                    website_username = input()
-                    print("Enter your password for the specified website above:")
+                    print("To generate a random password, enter 'gg';To create your preferred password, enter 'pp':")
+                    user_input = input().lower()
+                    if user_input == 'gg':
+                        print("Preferred username:")
+                        website_username = input()
+                        website_password = generate_random_password()
+                        print(f"Your password is {website_password}")
+                    else:
+                        print("Preferred username:")
+                        website_username = input()
+                        print("Preferred password:")
+                        website_password = input()
+                        print()
+                    print("Confirm your password for the specified website above:")
                     website_password = input()
                     print()
 
@@ -184,9 +235,9 @@ def main():
                     print('\n')
                     print(f"Congratulations!Your {website} account details have been saved successfully.")
                     print('* '*6)
-                    print("Enter 'vv' to view your credentials")
+                    print("Enter 'dis' to display your credentials")
                     user_input = input().lower()
-                    if user_input == 'vv':
+                    if user_input == 'dis':
                         print('Here are your credentials:')
                         print(f'{website}|{website_username}|{website_password}')
                     else:
